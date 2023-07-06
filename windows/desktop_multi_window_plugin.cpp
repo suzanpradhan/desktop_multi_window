@@ -147,6 +147,11 @@ void DesktopMultiWindowPlugin::HandleMethodCall(
     auto res = MultiWindowManager::Instance()->IsMaximized(window_id);
     result->Success(flutter::EncodableValue(res));
     return;
+  } else if (method_call.method_name() == "isMinimized") {
+    auto window_id = method_call.arguments()->LongValue();
+    auto res = MultiWindowManager::Instance()->IsMinimized(window_id);
+    result->Success(flutter::EncodableValue(res));
+    return;
   } else if (method_call.method_name() == "showTitleBar") {
     auto *arguments =
         std::get_if<flutter::EncodableMap>(method_call.arguments());

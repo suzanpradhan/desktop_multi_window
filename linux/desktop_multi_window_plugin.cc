@@ -120,6 +120,12 @@ static void desktop_multi_window_plugin_handle_method_call(
     auto isMaximized = MultiWindowManager::Instance()->IsMaximized(window_id);
     g_autoptr(FlValue) result = fl_value_new_bool(isMaximized);
     response = FL_METHOD_RESPONSE(fl_method_success_response_new(result));
+  } else if (g_strcmp0(method, "isMinimized") == 0) {
+    auto *args = fl_method_call_get_args(method_call);
+    auto window_id = fl_value_get_int(args);
+    auto isMinimized = MultiWindowManager::Instance()->IsMinimized(window_id);
+    g_autoptr(FlValue) result = fl_value_new_bool(isMinimized);
+    response = FL_METHOD_RESPONSE(fl_method_success_response_new(result));
   } else if (g_strcmp0(method, "startResizing") == 0) {
     auto *args = fl_method_call_get_args(method_call);
     auto window_id = fl_value_get_int(fl_value_lookup_string(args, "windowId"));

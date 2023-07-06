@@ -118,6 +118,14 @@ class MultiWindowManager {
     return window.isMaximized()
   }
 
+  func isMinimized(windowId: Int64) -> Bool {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return false
+    }
+    return window.isMinimized()
+  }
+
   func startDragging(windowId: Int64) {
     guard let window = windows[windowId] else {
       debugPrint("window \(windowId) not exists.")

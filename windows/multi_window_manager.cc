@@ -218,6 +218,14 @@ bool MultiWindowManager::IsMaximized(int64_t id) {
     return false;
 }
 
+bool MultiWindowManager::IsMinimized(int64_t id) {
+    auto window = windows_.find(id);
+    if (window != windows_.end()) {
+        return window->second->IsMinimized();
+    }
+    return false;
+}
+
 void MultiWindowManager::Unmaximize(int64_t id) {
     auto window = windows_.find(id);
     if (window != windows_.end()) {
