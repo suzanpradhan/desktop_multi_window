@@ -156,6 +156,15 @@ bool BaseFlutterWindow::IsMaximized() {
   return state & GDK_WINDOW_STATE_MAXIMIZED;
 }
 
+bool BaseFlutterWindow::IsMinimized() {
+  auto window = GetWindow();
+  if (!window) {
+    return false;
+  }
+  GdkWindowState state = gdk_window_get_state(gtk_widget_get_window(GTK_WIDGET(window)));
+  return state & GDK_WINDOW_STATE_ICONIFIED;
+}
+
 void BaseFlutterWindow::Maximize() {
   auto window = GetWindow();
   if (!window) {

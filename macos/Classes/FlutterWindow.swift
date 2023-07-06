@@ -60,6 +60,10 @@ class BaseFlutterWindow: NSObject {
     return window.isZoomed
   }
 
+  func isMinimized() -> Bool {
+    return window.isMiniaturized
+  }
+
   func maximize() {
     if (!isMaximized()) {
         window.zoom(nil);

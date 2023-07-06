@@ -105,6 +105,10 @@ public class FlutterMultiWindowPlugin: NSObject, FlutterPlugin {
       let windowId = call.arguments as! Int64
       let res = MultiWindowManager.shared.isMaximized(windowId: windowId)
       result(res)
+    case "isMinimized":
+      let windowId = call.arguments as! Int64
+      let res = MultiWindowManager.shared.isMinimized(windowId: windowId)
+      result(res)
     case "startDragging":
       let windowId = call.arguments as! Int64
       MultiWindowManager.shared.startDragging(windowId: windowId)

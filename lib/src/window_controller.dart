@@ -43,6 +43,9 @@ abstract class WindowController {
   /// Judge if the window is maximized.
   Future<bool> isMaximized();
 
+  /// Judge if the window is minimized.
+  Future<bool> isMinimized();
+
   /// Minimize the window
   Future<void> minimize();
 
@@ -83,7 +86,7 @@ abstract class WindowController {
   Future<void> setPreventClose(bool isPreventClose);
 
   /// Get x11 id for specific window
-  /// 
+  ///
   /// This is only valid in x11/Linux.
   Future<int> getXID();
 }

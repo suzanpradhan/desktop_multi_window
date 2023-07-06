@@ -245,6 +245,17 @@ bool MultiWindowManager::IsMaximized(int64_t id) {
   return false;
 }
 
+bool MultiWindowManager::IsMinimized(int64_t id) {
+  RLOCK_WINDOW;
+  auto window = windows_.find(id);
+  if (window != windows_.end()) {
+    UNLOCK_WINDOW;
+    return window->second->IsMinimized();
+  }
+  UNLOCK_WINDOW;
+  return false;
+}
+
 void MultiWindowManager::Unmaximize(int64_t id) {
   RLOCK_WINDOW;
   auto window = windows_.find(id);

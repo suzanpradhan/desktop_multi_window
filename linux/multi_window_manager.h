@@ -61,6 +61,8 @@ class MultiWindowManager : public std::enable_shared_from_this<MultiWindowManage
 
   bool IsMaximized(int64_t id);
 
+  bool IsMinimized(int64_t id);
+
   void Unmaximize(int64_t id);
 
   void ShowTitlebar(int64_t id, bool show);

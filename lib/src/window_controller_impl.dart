@@ -104,6 +104,11 @@ class WindowControllerMainImpl extends WindowController {
   }
 
   @override
+  Future<bool> isMinimized() async {
+    return (await _channel.invokeMethod<bool>('isMinimized', _id)) ?? false;
+  }
+
+  @override
   Future<void> maximize() {
     return _channel.invokeMethod('maximize', _id);
   }
@@ -160,15 +165,13 @@ class WindowControllerMainImpl extends WindowController {
     };
     await _channel.invokeMethod('setPreventClose', arguments);
   }
-  
+
   @override
   Future<int> getXID() async {
-    final Map<String, dynamic> arguments = {
-      'windowId': _id
-    };
+    final Map<String, dynamic> arguments = {'windowId': _id};
     return await _channel.invokeMethod<int>('getXID', arguments) ?? -1;
   }
-  
+
   @override
   Future<bool> isFullScreen() async {
     final Map<String, dynamic> arguments = {'windowId': _id};
