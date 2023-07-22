@@ -22,6 +22,9 @@ abstract class WindowController {
   /// Close the window.
   Future<void> close();
 
+  // Destroy the window.
+  Future<void> destroy();
+
   /// Show the window.
   Future<void> show();
 

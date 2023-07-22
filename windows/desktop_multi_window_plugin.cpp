@@ -70,6 +70,11 @@ void DesktopMultiWindowPlugin::HandleMethodCall(
     MultiWindowManager::Instance()->Close(window_id);
     result->Success();
     return;
+  } else if (method_call.method_name() == "destroy") {
+    auto window_id = method_call.arguments()->LongValue();
+    MultiWindowManager::Instance()->Destroy(window_id);
+    result->Success();
+    return;
   } else if (method_call.method_name() == "setFrame") {
     auto *arguments = std::get_if<flutter::EncodableMap>(method_call.arguments());
     auto window_id = arguments->at(flutter::EncodableValue("windowId")).LongValue();
@@ -100,6 +105,11 @@ void DesktopMultiWindowPlugin::HandleMethodCall(
     return;
   } else if (method_call.method_name() == "getAllSubWindowIds") {
     auto window_ids = MultiWindowManager::Instance()->GetAllSubWindowIds();
+    // window_ids must contain at least one element
+    // It seems a bug of flutter engine
+    if (window_ids.empty()) {
+      window_ids.push_back(0);
+    }
     result->Success(flutter::EncodableValue(window_ids));
     return;
   } else if (method_call.method_name() == "focus") {

@@ -4,7 +4,7 @@
 
 #include "window_channel.h"
 #include "flutter/standard_method_codec.h"
-
+#include <iostream>
 #include <variant>
 
 std::unique_ptr<WindowChannel>
