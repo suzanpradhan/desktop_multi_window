@@ -1,5 +1,4 @@
 const kWindowEventClose = 'close';
-const kWindowEventDestroy = 'destroy';
 const kWindowEventFocus = 'focus';
 const kWindowEventBlur = 'blur';
 const kWindowEventMaximize = 'maximize';

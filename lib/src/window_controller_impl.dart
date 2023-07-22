@@ -24,11 +24,6 @@ class WindowControllerMainImpl extends WindowController {
   }
 
   @override
-  Future<void> destroy() {
-    return _channel.invokeMethod('destroy', _id);
-  }
-
-  @override
   Future<void> hide() {
     return _channel.invokeMethod('hide', _id);
   }
