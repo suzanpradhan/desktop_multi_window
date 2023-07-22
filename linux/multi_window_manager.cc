@@ -277,7 +277,7 @@ void MultiWindowManager::ShowTitlebar(int64_t id, bool show) {
 void MultiWindowManager::OnWindowClose(int64_t id) {}
 
 void MultiWindowManager::OnWindowDestroy(int64_t id) {
-  std::cout << "destory id" << id << std::endl;
+  std::cout << "destory id " << id << std::endl;
   WLOCK_WINDOW;
   windows_.erase(id);
   UNLOCK_WINDOW;
