@@ -53,8 +53,6 @@ class MultiWindowManager : public std::enable_shared_from_this<MultiWindowManage
 
   void Close(int64_t id);
 
-  void Destroy(int64_t id);
-
   void SetFrame(int64_t id, double_t x, double_t y, double_t width, double_t height);
   flutter::EncodableMap GetFrame(int64_t id);
 

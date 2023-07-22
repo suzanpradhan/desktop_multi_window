@@ -70,11 +70,6 @@ void DesktopMultiWindowPlugin::HandleMethodCall(
     MultiWindowManager::Instance()->Close(window_id);
     result->Success();
     return;
-  } else if (method_call.method_name() == "destroy") {
-    auto window_id = method_call.arguments()->LongValue();
-    MultiWindowManager::Instance()->Destroy(window_id);
-    result->Success();
-    return;
   } else if (method_call.method_name() == "setFrame") {
     auto *arguments = std::get_if<flutter::EncodableMap>(method_call.arguments());
     auto window_id = arguments->at(flutter::EncodableValue("windowId")).LongValue();

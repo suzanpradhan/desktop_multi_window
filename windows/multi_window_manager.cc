@@ -108,10 +108,6 @@ void MultiWindowManager::Close(int64_t id) {
   }
 }
 
-void MultiWindowManager::Destroy(int64_t id) {
-  windows_.erase(id);
-}
-
 void MultiWindowManager::SetFrame(int64_t id, double x, double y, double width, double height) {
   auto window = windows_.find(id);
   if (window != windows_.end()) {
