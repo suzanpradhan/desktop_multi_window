@@ -213,6 +213,7 @@ gboolean onWindowResize(GtkWidget *widget, gpointer data)
 {
   auto *self = static_cast<FlutterWindow *>(data);
   _emitEvent("resize", self);
+  _emitEvent("resized", self);
   return false;
 }
 
@@ -236,6 +237,7 @@ gboolean onWindowMove(GtkWidget *widget, GdkEvent *event, gpointer data)
 {
   auto *self = static_cast<FlutterWindow *>(data);
   _emitEvent("move", self);
+  _emitEvent("moved", self);
   return false;
 }
 
