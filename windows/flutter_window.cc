@@ -335,8 +335,13 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
               last_state = STATE_NORMAL;
           }
       }
+      EmitEvent("resized");
       break;
     }
+
+    case WM_MOVE:
+      EmitEvent("moved");
+      break;
 
     case WM_ACTIVATE: {
       if (child_content_ != nullptr) {
