@@ -100,6 +100,11 @@ void DesktopMultiWindowPlugin::HandleMethodCall(
     return;
   } else if (method_call.method_name() == "getAllSubWindowIds") {
     auto window_ids = MultiWindowManager::Instance()->GetAllSubWindowIds();
+    // window_ids must contain at least one element
+    // It seems a bug of flutter engine
+    if (window_ids.empty()) {
+      window_ids.push_back(0);
+    }
     result->Success(flutter::EncodableValue(window_ids));
     return;
   } else if (method_call.method_name() == "focus") {

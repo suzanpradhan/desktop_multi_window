@@ -177,7 +177,6 @@ void _emitEvent(const char *event_name, FlutterWindow *self)
 gboolean onWindowClose(GtkWidget *widget, GdkEvent *, gpointer arg)
 {
   auto *self = static_cast<FlutterWindow *>(arg);
-  _emitEvent("close", self);
   // destory hook
   if (!self->isPreventClose)
   {
@@ -191,6 +190,10 @@ gboolean onWindowClose(GtkWidget *widget, GdkEvent *, gpointer arg)
       callback->OnWindowClose(self->id_);
       callback->OnWindowDestroy(self->id_);
     }
+  }
+  else
+  {
+    _emitEvent("close", self);
   }
   return self->isPreventClose;
 }

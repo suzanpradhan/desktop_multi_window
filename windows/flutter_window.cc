@@ -162,7 +162,6 @@ FlutterWindow::FlutterWindow(
 
   // hide the window when created.
   ShowWindow(window_handle, SW_HIDE);
-
 }
 
 // static
@@ -265,12 +264,7 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
       if (!destroyed_) {
         destroyed_ = true;
         // Give onDestroy callback to Flutter to close window gracefully
-        if (window_channel_) {
-            auto args = flutter::EncodableValue(flutter::EncodableMap());
-            window_channel_->InvokeMethod(0, "onDestroy", &args);
-            window_channel_->SetMethodCallHandler(nullptr);
-            window_channel_.reset();
-        }
+        tryInvokeChannelOnDestroy();
         if (auto callback = callback_.lock()) {
           callback->OnWindowDestroy(id_);
         }
@@ -376,6 +370,16 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
   return DefWindowProc(window_handle_, message, wparam, lparam);
 }
 
+void FlutterWindow::tryInvokeChannelOnDestroy()
+{
+  if (window_channel_) {
+      auto args = flutter::EncodableValue(flutter::EncodableMap());
+      window_channel_->InvokeMethod(0, "onDestroy", &args);
+      window_channel_->SetMethodCallHandler(nullptr);
+      window_channel_.reset();
+  }
+}
+
 void FlutterWindow::EmitEvent(const char* eventName)
 {
     auto params = flutter::EncodableMap();
@@ -385,6 +389,7 @@ void FlutterWindow::EmitEvent(const char* eventName)
 }
 
 void FlutterWindow::Destroy() {
+  tryInvokeChannelOnDestroy();
   if (window_channel_) {
     window_channel_ = nullptr;
   }
