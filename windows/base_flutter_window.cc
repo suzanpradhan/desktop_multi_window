@@ -176,7 +176,7 @@ bool BaseFlutterWindow::IsMaximized() {
     WINDOWPLACEMENT windowPlacement;
     GetWindowPlacement(window, &windowPlacement);
 
-    return windowPlacement.showCmd == SW_MAXIMIZE;
+    return windowPlacement.showCmd == SW_SHOWMAXIMIZED;
 }
 
 void BaseFlutterWindow::Maximize() {
@@ -187,7 +187,7 @@ void BaseFlutterWindow::Maximize() {
     WINDOWPLACEMENT windowPlacement;
     GetWindowPlacement(window, &windowPlacement);
     // non vertical now
-    if (windowPlacement.showCmd != SW_MAXIMIZE) {
+    if (windowPlacement.showCmd != SW_SHOWMAXIMIZED) {
         PostMessage(window, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
     }
 }
@@ -200,7 +200,7 @@ void BaseFlutterWindow::Unmaximize() {
     WINDOWPLACEMENT windowPlacement;
     GetWindowPlacement(window, &windowPlacement);
 
-    if (windowPlacement.showCmd != SW_NORMAL) {
+    if (windowPlacement.showCmd != SW_SHOWNORMAL) {
         PostMessage(window, WM_SYSCOMMAND, SC_RESTORE, 0);
     }
 }
@@ -274,7 +274,7 @@ void BaseFlutterWindow::Maximize(const flutter::EncodableMap& args) {
             MAKELPARAM(cursorPos.x, cursorPos.y));
     }
     else {
-        if (windowPlacement.showCmd != SW_MAXIMIZE) {
+        if (windowPlacement.showCmd != SW_SHOWMAXIMIZED) {
             PostMessage(hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
         }
     }
@@ -320,7 +320,7 @@ void BaseFlutterWindow::Restore() {
   WINDOWPLACEMENT windowPlacement;
   GetWindowPlacement(handle, &windowPlacement);
 
-  if (windowPlacement.showCmd != SW_NORMAL) {
+  if (windowPlacement.showCmd != SW_SHOWNORMAL) {
     PostMessage(handle, WM_SYSCOMMAND, SC_RESTORE, 0);
   }
 }
@@ -330,6 +330,7 @@ void BaseFlutterWindow::SetBounds(double_t x, double_t y, double_t width, double
   if (!handle) {
     return;
   }
+  ShowWindow(handle, SW_RESTORE);
   MoveWindow(handle, int32_t(x), int32_t(y),
              static_cast<int>(width),
              static_cast<int>(height),
