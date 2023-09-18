@@ -85,12 +85,11 @@ class DesktopMultiWindow {
     try {
       final result = await miltiWindowChannel
           .invokeMethod<List<int>>('getAllSubWindowIds');
-      var ids = result ?? [];
-      // remove 0
-      ids.removeWhere((e) => e == 0);
+      var ids = result?.where((id) => id != 0)?.toList() ?? [];
       assert(ids.every((id) => id > 0), 'id must be greater than 0');
       return ids;
     } catch (e) {
+      print('Unreachable, plugin exception, func getAllSubWindowIds(), $e');
       return [];
     }
   }
