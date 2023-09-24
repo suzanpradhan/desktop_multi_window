@@ -330,7 +330,16 @@ void BaseFlutterWindow::SetBounds(double_t x, double_t y, double_t width, double
   if (!handle) {
     return;
   }
-  ShowWindow(handle, SW_RESTORE);
+  // A simple workaround for the first problem https://github.com/rustdesk/rustdesk/issues/5791
+  // If is the first call to move window, we do not call ShowWindow(handle, SW_RESTORE), to avoid the blank window.
+  if (is_first_move_) {
+    is_first_move_ = false;
+  } else {
+    // We do need the following call or `SetWindowPlacement` to set the window `showCmd` value.
+    // MoveWindow will not change the `showCmd` value of `GetWindowPlacement`.
+    // So the state of the window will be wrong after the window is maximized or minimized and then moved.
+    ShowWindow(handle, SW_RESTORE);
+  }
   MoveWindow(handle, int32_t(x), int32_t(y),
              static_cast<int>(width),
              static_cast<int>(height),
