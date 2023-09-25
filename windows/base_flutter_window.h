@@ -81,6 +81,7 @@ private:
 	bool is_frameless_ = false;
   bool is_prevent_close_ = false;
 
+  bool is_first_move_ = true;
 };
 
 #endif //MULTI_WINDOW_WINDOWS_BASE_FLUTTER_WINDOW_H_
