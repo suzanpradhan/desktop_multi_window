@@ -84,8 +84,12 @@ class DesktopMultiWindow {
   static Future<List<int>> getAllSubWindowIds() async {
     try {
       final result = await miltiWindowChannel
-          .invokeMethod<List<int>>('getAllSubWindowIds');
-      var ids = result?.where((id) => id != 0)?.toList() ?? [];
+          .invokeMethod<List<dynamic>>('getAllSubWindowIds');
+      final ids = result
+              ?.map<int>((id) => id.toInt())
+              .where((id) => id != 0)
+              ?.toList() ??
+          [];
       assert(ids.every((id) => id > 0), 'id must be greater than 0');
       return ids;
     } catch (e) {
