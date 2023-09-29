@@ -62,7 +62,7 @@ bool BaseFlutterWindow::IsHidden() {
   if (!window) {
     return false;
   }
-  return !gtk_widget_get_visible(GTK_WIDGET(window));
+  return !gtk_widget_is_visible(GTK_WIDGET(window));
 }
 
 void BaseFlutterWindow::Focus() {

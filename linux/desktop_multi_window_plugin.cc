@@ -45,7 +45,7 @@ static void desktop_multi_window_plugin_handle_method_call(
     response = FL_METHOD_RESPONSE(fl_method_success_response_new(nullptr));
   } else if (g_strcmp0(method, "isHidden") == 0) {
     auto *args = fl_method_call_get_args(method_call);
-    auto window_id = fl_value_get_int(fl_value_lookup_string(args, "windowId"));
+    auto window_id = fl_value_get_int(args);
     auto isHidden = MultiWindowManager::Instance()->IsHidden(window_id);
     response = FL_METHOD_RESPONSE(
         fl_method_success_response_new(fl_value_new_bool(isHidden)));
