@@ -187,7 +187,6 @@ LRESULT CALLBACK FlutterWindow::WndProc(HWND window, UINT message, WPARAM wparam
 }
 
 LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) {
-
   // Give Flutter, including plugins, an opportunity to handle window messages.
   if (flutter_controller_) {
     std::optional<LRESULT> result = flutter_controller_->HandleTopLevelWindowProc(hwnd, message, wparam, lparam);

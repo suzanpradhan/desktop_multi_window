@@ -57,6 +57,14 @@ void BaseFlutterWindow::Hide() {
   gtk_window_resize(GTK_WINDOW(window), width, height);
 }
 
+bool BaseFlutterWindow::IsHidden() {
+  auto window = GetWindow();
+  if (!window) {
+    return false;
+  }
+  return !gtk_widget_get_visible(GTK_WIDGET(window));
+}
+
 void BaseFlutterWindow::Focus() {
   auto window = GetWindow();
   if (!window) {

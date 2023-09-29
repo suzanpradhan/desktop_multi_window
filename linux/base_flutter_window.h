@@ -23,6 +23,8 @@ public:
 
   void Hide();
 
+  bool IsHidden();
+
   void Focus();
 
   bool IsFullScreen();

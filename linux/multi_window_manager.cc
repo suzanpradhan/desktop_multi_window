@@ -137,6 +137,18 @@ void MultiWindowManager::Hide(int64_t id) {
   UNLOCK_WINDOW;
 }
 
+bool MultiWindowManager::IsHidden(int64_t id) {
+  RLOCK_WINDOW;
+  auto window = windows_.find(id);
+  if (window != windows_.end()) {
+    bool ret = window->second->IsHidden();
+    UNLOCK_WINDOW;
+    return ret;
+  }
+  UNLOCK_WINDOW;
+  return false;
+}
+
 void MultiWindowManager::Close(int64_t id) {
   RLOCK_WINDOW;
   auto window = windows_.find(id);

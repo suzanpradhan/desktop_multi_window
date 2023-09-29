@@ -400,6 +400,14 @@ void BaseFlutterWindow::Hide() {
   ShowWindow(handle, SW_HIDE);
 }
 
+bool BaseFlutterWindow::IsHidden() { 
+    auto window = GetWindowHandle();
+    if (!window) {
+        return false;
+    }
+    return IsWindowVisible(window) != TRUE;
+}
+
 void BaseFlutterWindow::StartResizing(const flutter::EncodableMap *param) {
   auto handle = GetWindowHandle();
   if (!handle) {
