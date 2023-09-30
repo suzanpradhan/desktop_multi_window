@@ -29,6 +29,11 @@ class WindowControllerMainImpl extends WindowController {
   }
 
   @override
+  Future<bool> isHidden() async {
+    return (await _channel.invokeMethod<bool>('isHidden', _id)) ?? false;
+  }
+
+  @override
   Future<void> show() {
     return _channel.invokeMethod('show', _id);
   }

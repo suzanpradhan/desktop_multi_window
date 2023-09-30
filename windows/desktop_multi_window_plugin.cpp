@@ -65,6 +65,11 @@ void DesktopMultiWindowPlugin::HandleMethodCall(
     MultiWindowManager::Instance()->Hide(window_id);
     result->Success();
     return;
+  } else if (method_call.method_name() == "isHidden") {
+    auto window_id = method_call.arguments()->LongValue();
+    auto res = MultiWindowManager::Instance()->IsHidden(window_id);
+    result->Success(flutter::EncodableValue(res));
+    return;
   } else if (method_call.method_name() == "close") {
     auto window_id = method_call.arguments()->LongValue();
     MultiWindowManager::Instance()->Close(window_id);

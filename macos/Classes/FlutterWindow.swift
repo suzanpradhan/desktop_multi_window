@@ -30,6 +30,10 @@ class BaseFlutterWindow: NSObject {
     window.orderOut(nil)
   }
 
+  func isHidden() -> Bool {
+    return !window.isVisible
+  }
+
   func center() {
     window.center()
   }

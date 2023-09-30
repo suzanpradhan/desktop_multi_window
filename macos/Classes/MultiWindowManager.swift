@@ -56,6 +56,14 @@ class MultiWindowManager {
     window.hide()
   }
 
+  func isHidden(windowId: Int64) -> Bool {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return true
+    }
+    return window.isHidden()
+  }
+
   func close(windowId: Int64) {
     guard let window = windows[windowId] else {
       debugPrint("window \(windowId) not exists.")

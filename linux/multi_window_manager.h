@@ -32,6 +32,8 @@ class MultiWindowManager : public std::enable_shared_from_this<MultiWindowManage
 
   void Hide(int64_t id);
 
+  bool IsHidden(int64_t id);
+
   void Focus(int64_t id);
 
   void Close(int64_t id);

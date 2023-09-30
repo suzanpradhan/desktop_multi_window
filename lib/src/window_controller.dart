@@ -28,6 +28,9 @@ abstract class WindowController {
   /// Hide the window.
   Future<void> hide();
 
+  /// Judge if the window is hidden.
+  Future<bool> isHidden();
+
   /// Focus the window.
   Future<void> focus();
 
