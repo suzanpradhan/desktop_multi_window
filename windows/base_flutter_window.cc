@@ -98,6 +98,13 @@ void BaseFlutterWindow::SetFullscreen(bool fullscreen) {
         g_title_bar_style_before_fullscreen = title_bar_style_;
         g_is_frameless_before_fullscreen = is_frameless_;
     }
+
+    if (IsWindowVisible(window) == TRUE) {
+      g_style_before_fullscreen = g_style_before_fullscreen | WS_VISIBLE;
+    } else {
+      g_style_before_fullscreen = g_style_before_fullscreen & ~WS_VISIBLE;
+    }
+
     // this variable should be set before telling windows to change the fullscreen status. 
     // Or the right and bottom area would be cut off after cancelling the fullscreen.
     g_is_window_fullscreen = fullscreen;
