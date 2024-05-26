@@ -345,7 +345,11 @@ void BaseFlutterWindow::SetBounds(double_t x, double_t y, double_t width, double
     // We do need the following call or `SetWindowPlacement` to set the window `showCmd` value.
     // MoveWindow will not change the `showCmd` value of `GetWindowPlacement`.
     // So the state of the window will be wrong after the window is maximized or minimized and then moved.
-    if (IsWindowVisible(handle) == TRUE) {
+    WINDOWPLACEMENT windowPlacement;
+    GetWindowPlacement(handle, &windowPlacement);
+    if (windowPlacement.showCmd == SW_SHOWMAXIMIZED || windowPlacement.showCmd == SW_SHOWMINIMIZED) {
+      // Both `PostMessage(handle, WM_SYSCOMMAND, SC_RESTORE, 0);` and `ShowWindow(handle, SW_RESTORE);`
+      // have a side effect that the window will be show if it is hidden.
       ShowWindow(handle, SW_RESTORE);
     }
   }
