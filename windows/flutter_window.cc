@@ -77,6 +77,7 @@ void RegisterWindowClass(WNDPROC wnd_proc) {
     window_class.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
     window_class.lpszMenuName = nullptr;
     window_class.lpfnWndProc = wnd_proc;
+    window_class.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
     RegisterClass(&window_class);
   }
   class_registered_++;
