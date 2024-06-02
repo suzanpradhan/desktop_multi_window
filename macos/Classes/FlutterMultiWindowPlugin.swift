@@ -117,6 +117,12 @@ public class FlutterMultiWindowPlugin: NSObject, FlutterPlugin {
       let windowId = call.arguments as! Int64
       MultiWindowManager.shared.startDragging(windowId: windowId)
       result(nil)
+    case "setMovable":
+      let arguments = call.arguments as! [String: Any?]
+      let windowId = arguments["windowId"] as! Int64
+      let isMovable = arguments["isMovable"] as! Bool
+      MultiWindowManager.shared.setMovable(windowId: windowId, isMovable: isMovable)
+      result(nil)
     case "showTitleBar":
       let arguments = call.arguments as! [String: Any?]
       let windowId = arguments["windowId"] as! Int64

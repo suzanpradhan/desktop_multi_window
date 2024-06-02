@@ -37,6 +37,12 @@ abstract class WindowController {
   /// Start dragging the window.
   Future<void> startDragging();
 
+  // https://github.com/rustdesk-org/window_manager/blob/f19acdb008645366339444a359a45c3257c8b32e/lib/src/window_manager.dart#L470
+  /// Sets whether the window can be moved by user.
+  ///
+  /// @platforms macos
+  Future<void> setMovable(bool isMovable);
+
   /// Maximize the window.
   Future<void> maximize();
 

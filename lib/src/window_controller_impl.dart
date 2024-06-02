@@ -103,6 +103,14 @@ class WindowControllerMainImpl extends WindowController {
     return _channel.invokeMethod('startDragging', _id);
   }
 
+  /// Sets whether the window can be moved by user.
+  ///
+  /// @platforms macos
+  /// @override
+  Future<void> setMovable(bool isMovable) async {
+    return _channel.invokeMethod('setMovable', <String, dynamic>{'windowId': _id, 'isMovable': isMovable});
+  }
+
   @override
   Future<bool> isMaximized() async {
     return (await _channel.invokeMethod<bool>('isMaximized', _id)) ?? false;

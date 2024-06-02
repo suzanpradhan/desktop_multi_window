@@ -142,6 +142,14 @@ class MultiWindowManager {
     window.startDragging()
   }
 
+  func setMovable(windowId: Int64, isMovable: Bool) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
+    }
+    window.setMovable(isMovable: isMovable)
+  }
+
   func startResizing(windowId: Int64, arguments: [String: Any?]) {
     guard let window = windows[windowId] else {
       debugPrint("window \(windowId) not exists.")
