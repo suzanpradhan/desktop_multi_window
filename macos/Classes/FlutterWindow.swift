@@ -131,10 +131,15 @@ class BaseFlutterWindow: NSObject {
   func startDragging() {
     DispatchQueue.main.async {
       let this: NSWindow  = self.window
+      this.isMovable = true
       if(this.currentEvent != nil) {
           this.performDrag(with: this.currentEvent!)
       }
     }
+  }
+
+  func setMovable(isMovable: Bool) {
+    self.window.isMovable = isMovable
   }
 
   func startResizing(arguments: [String: Any?]) {
@@ -185,6 +190,7 @@ class FlutterWindow: BaseFlutterWindow {
 
     super.init(window: window, channel: windowChannel)
 
+    window.isMovable = false
     window.delegate = self
     window.isReleasedWhenClosed = false
     window.titleVisibility = .hidden
