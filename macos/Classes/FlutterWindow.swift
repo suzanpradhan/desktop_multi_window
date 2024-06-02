@@ -190,7 +190,6 @@ class FlutterWindow: BaseFlutterWindow {
 
     super.init(window: window, channel: windowChannel)
 
-    window.isMovable = false
     window.delegate = self
     window.isReleasedWhenClosed = false
     window.titleVisibility = .hidden
