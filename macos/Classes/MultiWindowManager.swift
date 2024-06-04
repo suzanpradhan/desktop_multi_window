@@ -23,6 +23,14 @@ class MultiWindowManager {
     window.delegate = self
     window.windowChannel.methodHandler = self.handleMethodCall
     windows[windowId] = window
+    // https://github.com/flutter/flutter/issues/133533
+    // https://github.com/MixinNetwork/flutter-plugins/issues/289#issuecomment-1817665239
+    for (_, wnd) in windows {
+      if !wnd.isHidden() {
+        wnd.hide()
+        wnd.show()
+      }
+    }
     return windowId
   }
 
