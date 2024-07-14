@@ -37,6 +37,9 @@ public class FlutterMultiWindowPlugin: NSObject, FlutterPlugin {
       let arguments = call.arguments as? String
       let windowId = MultiWindowManager.shared.create(arguments: arguments ?? "")
       result(windowId)
+    case "hideShow":
+      MultiWindowManager.shared.hideShow()
+      result(nil)
     case "show":
       let windowId = call.arguments as! Int64
       MultiWindowManager.shared.show(windowId: windowId)
