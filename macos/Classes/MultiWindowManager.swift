@@ -23,15 +23,18 @@ class MultiWindowManager {
     window.delegate = self
     window.windowChannel.methodHandler = self.handleMethodCall
     windows[windowId] = window
-    // https://github.com/flutter/flutter/issues/133533
-    // https://github.com/MixinNetwork/flutter-plugins/issues/289#issuecomment-1817665239
+    return windowId
+  }
+
+  // https://github.com/flutter/flutter/issues/133533
+  // https://github.com/MixinNetwork/flutter-plugins/issues/289#issuecomment-1817665239
+  func hideShow() {
     for (_, wnd) in windows {
       if !wnd.isHidden() {
         wnd.hide()
         wnd.show()
       }
     }
-    return windowId
   }
 
   func attachMainWindow(window: NSWindow, _ channel: WindowChannel) {
@@ -53,6 +56,7 @@ class MultiWindowManager {
       debugPrint("window \(windowId) not exists.")
       return
     }
+    hideShow()
     window.show()
   }
 
