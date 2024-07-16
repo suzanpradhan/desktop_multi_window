@@ -101,14 +101,13 @@ class DesktopMultiWindow {
   /// Hide or show all visiable windows.
   /// https://github.com/flutter/flutter/issues/133533
   /// @platforms macos
-  static Future<dynamic> hideShow() async {
+  static Future<void> hideShow(int windowId) async {
     try {
-      final result = await miltiWindowChannel
-          .invokeMethod<List<dynamic>>('hideShow');
+      final result =
+          await miltiWindowChannel.invokeMethod('hideShow', windowId);
       return result;
     } catch (e) {
       print('Unreachable, plugin exception, func hideShow(), $e');
-      return null;
     }
   }
 
