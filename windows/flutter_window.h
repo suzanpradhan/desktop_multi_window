@@ -74,6 +74,15 @@ class FlutterWindow : public BaseFlutterWindow {
   void EmitEvent(const char* eventName);
 
   void tryInvokeChannelOnDestroy();
+
+  void adjustNCCALCSIZE(NCCALCSIZE_PARAMS* sz) {
+    LONG l = sz->rgrc[0].left;
+    LONG t = sz->rgrc[0].top;
+    sz->rgrc[0].left -= l;
+    sz->rgrc[0].top -= t;
+    sz->rgrc[0].right += l;
+    sz->rgrc[0].bottom += t;
+  }
 };
 
 #endif //DESKTOP_MULTI_WINDOW_WINDOWS_FLUTTER_WINDOW_H_
