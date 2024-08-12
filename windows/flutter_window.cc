@@ -215,7 +215,7 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
         if (wparam && IsFrameless()) {
             // Add borders when maximized so app doesn't get cut off.
             if (IsMaximized()) {
-                adjustNCCALCSIZE(reinterpret_cast<NCCALCSIZE_PARAMS*>(lparam));
+                adjustNCCALCSIZE(hwnd, reinterpret_cast<NCCALCSIZE_PARAMS*>(lparam));
             }
             // This cuts the app at the bottom by one pixel but that's necessary to
             // prevent jitter when resizing the app
@@ -226,7 +226,7 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
         if (wparam && this->title_bar_style_ == "hidden") {
             // Add 8 pixel to the top border when maximized so the app isn't cut off
             if (this->IsMaximized()) {
-                adjustNCCALCSIZE(reinterpret_cast<NCCALCSIZE_PARAMS*>(lparam));
+                adjustNCCALCSIZE(hwnd, reinterpret_cast<NCCALCSIZE_PARAMS*>(lparam));
             }
             else {
                 NCCALCSIZE_PARAMS* sz = reinterpret_cast<NCCALCSIZE_PARAMS*>(lparam);

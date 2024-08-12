@@ -75,9 +75,30 @@ class FlutterWindow : public BaseFlutterWindow {
 
   void tryInvokeChannelOnDestroy();
 
-  void adjustNCCALCSIZE(NCCALCSIZE_PARAMS* sz) {
-    LONG l = sz->rgrc[0].left;
-    LONG t = sz->rgrc[0].top;
+  void adjustNCCALCSIZE(HWND hwnd, NCCALCSIZE_PARAMS *sz) {
+    LONG l = 8;
+    LONG t = 8;
+
+    HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+    if (monitor != NULL)
+    {
+      MONITORINFO monitorInfo;
+      monitorInfo.cbSize = sizeof(MONITORINFO);
+      if (TRUE == GetMonitorInfo(monitor, &monitorInfo))
+      {
+        l = sz->rgrc[0].left - monitorInfo.rcWork.left;
+        t = sz->rgrc[0].top - monitorInfo.rcWork.top;
+      }
+      else
+      {
+        // GetMonitorInfo failed, use (8, 8) as default value
+      }
+    }
+    else
+    {
+      // unreachable code
+    }
+
     sz->rgrc[0].left -= l;
     sz->rgrc[0].top -= t;
     sz->rgrc[0].right += l;
