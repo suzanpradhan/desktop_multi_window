@@ -233,6 +233,11 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
                 // on windows 10, if set to 0, there's a white line at the top
                 // of the app and I've yet to find a way to remove that.
                 sz->rgrc[0].top += IsWindows11OrGreater() ? 0 : 1;
+                // We need the following code to resize the window.
+                // https://github.com/rustdesk/rustdesk/discussions/9061
+                sz->rgrc[0].right -= 8;
+                sz->rgrc[0].bottom -= 8;
+                sz->rgrc[0].left -= -8;
             }
 
             // Previously (WVR_HREDRAW | WVR_VREDRAW), but returning 0 or 1 doesn't
