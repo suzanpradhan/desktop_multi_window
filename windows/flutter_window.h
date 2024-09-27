@@ -79,7 +79,11 @@ class FlutterWindow : public BaseFlutterWindow {
     LONG l = 8;
     LONG t = 8;
 
-    HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+    // HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+    // Don't use `MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST)` above.
+    // Because if the window is restored from minimized state, the window is not in the correct monitor.
+    // The monitor is always the left-most monitor.
+    HMONITOR monitor = MonitorFromRect(&sz->rgrc[0], MONITOR_DEFAULTTONEAREST);
     if (monitor != NULL)
     {
       MONITORINFO monitorInfo;
