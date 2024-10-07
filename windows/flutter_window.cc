@@ -74,10 +74,9 @@ void RegisterWindowClass(WNDPROC wnd_proc) {
     window_class.hInstance = GetModuleHandle(nullptr);
     window_class.hIcon =
         LoadIcon(window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
-    window_class.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
     window_class.lpszMenuName = nullptr;
     window_class.lpfnWndProc = wnd_proc;
-    window_class.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+    window_class.hbrBackground = NULL;
     RegisterClass(&window_class);
   }
   class_registered_++;
@@ -136,7 +135,7 @@ FlutterWindow::FlutterWindow(
       Scale(target_point.x, scale_factor_), Scale(target_point.y, scale_factor_),
       Scale(1280, scale_factor_), Scale(720, scale_factor_),
       nullptr, nullptr, GetModuleHandle(nullptr), this);
-
+  
   RECT frame;
   GetClientRect(window_handle, &frame);
   flutter::DartProject project(L"data");
