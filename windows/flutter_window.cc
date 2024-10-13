@@ -365,7 +365,16 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
         EmitEvent(eventName);
         break;
     }
-
+    case WM_ERASEBKGND: {
+        if(IsEraseTransparent()) break;
+        HDC hdc = (HDC) wparam;
+        HBRUSH brush = CreateSolidBrush(GetEraseBackgroundColor());
+        RECT rect;
+        GetClientRect(hwnd, &rect);
+        FillRect(hdc, &rect, brush);
+        DeleteObject(brush);
+        return 1; // Background has been erased
+    }
     default: break;
   }
 
