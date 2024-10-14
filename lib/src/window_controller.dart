@@ -98,4 +98,10 @@ abstract class WindowController {
   ///
   /// This is only valid in x11/Linux.
   Future<int> getXID();
+
+  // https://github.com/rustdesk-org/rustdesk_desktop_multi_window/pull/26
+  /// Sets the background color before showing the window.
+  /// 
+  /// @platforms windows
+  Future<void> setInitBackgroundColor(Color color);
 }
