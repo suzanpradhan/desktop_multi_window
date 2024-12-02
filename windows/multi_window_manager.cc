@@ -20,7 +20,11 @@ class FlutterMainWindow : public BaseFlutterWindow {
 
   }
 
-  ~FlutterMainWindow() override = default;
+  ~FlutterMainWindow() override {
+    if (channel_) {
+      channel_.release();
+    }
+  };
 
   WindowChannel *GetWindowChannel() override {
     return channel_.get();
